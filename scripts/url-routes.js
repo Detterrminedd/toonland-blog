@@ -3,7 +3,9 @@ const urlPageTitle = "Toonland Blog";
 document.addEventListener('click', e => {
     const {target} = e;
     // console.log(target,'target');
-    if(!target.matches('nav a')) return;
+    if(!target.matches('nav a')){
+         return;
+    }
     e.preventDefault();
     urlRoute();
 });
@@ -40,16 +42,19 @@ const urlRoute = (e) => {
 
 const urlLocatoionHandler = async() => {
     const location = window.location.pathname;
+    console.log(location,'location');
     if(location.length ===  0) {
         location = "/";
     }
-    const route = urlRoutes[location] || urlRoutes["404"];
+    const route = urlRoutes[location] || urlRoutes[404];
     const html = await fetch(route.pages).then(res =>
-         res.text());
+    res.text());
+
     document.querySelector("#content").innerHTML = html;
+
     document.title = route.title;
     document
-        .querySelector("meta[name=description]")
+        .querySelector('meta[name= "description"]')
         .setAttribute("content", route.description);
     }
 
